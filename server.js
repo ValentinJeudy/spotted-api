@@ -9,6 +9,8 @@ const port = config.get('options.SERVER_PORT')
 
 server.listen(config.get('options.SERVER_PORT'))
 
+console.info('listening on port :', port)
+
 Mongoose.connect(bdd)
 
 routes(server)
