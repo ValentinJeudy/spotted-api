@@ -14,9 +14,6 @@ module.exports = {
   getVisibleSpots: (req, res, corners) => {
     const coords = JSON.parse(corners)
 
-    console.log('corners ===> ', require('util').inspect(corners, { colors: true, depth: 2 }))
-    console.log('coords ===> ', require('util').inspect(coords, { colors: true, depth: 2 }))
-
     spotModel.find({
       "localisation.lat": { $gte: coords.swc.lat, $lte: coords.nec.lat },
       "localisation.lng": { $gte: coords.swc.lng, $lte: coords.nec.lng },
@@ -47,7 +44,15 @@ module.exports = {
     res.status(200).send(`The spot : ${newSpot.name} has been succesfully updated !!`)
     })
   },
-  deleteSpot: (req, res) => {
+  deleteSpot: (req, res, spot) => {
+    const spotToRemove = JSON.parse(spot)
 
+    console.log('spotToRemove ===> ', require('util').inspect(spotToRemove, { colors: true, depth: 2 }))
+    spotModel.deleteOne(spotToRemove, (err, data) => {
+      if (err) {
+        res.status(500).send(`Something broke : ${err}`)
+      }
+      res.status(200).send(`The spot : ${spotToRemove._id} has been succesfully deleted !!`)
+    })
   }
 }

@@ -18,7 +18,7 @@ module.exports = (app) => {
     spotsController.updateSpot(req, res, req.params.spot)
   })
 
-  app.post('/api/deletespot/:spot', (req, res) => {
+  app.put('/api/deletespot/:spot', (req, res) => {
     spotsController.deleteSpot(req, res, req.params.spot)
   })
 }
