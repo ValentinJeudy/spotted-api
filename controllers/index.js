@@ -27,16 +27,14 @@ module.exports = {
       res.json(data)
     })
   },
-  addSpot: async (req, res, spot) => {
+  addSpot: (req, res, spot) => {
     const newSpot = JSON.parse(spot)
 
-    console.log('spot ===> ', require('util').inspect(newSpot, { colors: true, depth: 2 }))
-    await spotModel.create(newSpot, (err, res) => {
+    spotModel.create(newSpot, (err, data) => {
       if (err) {
         res.status(500).send('Seomething broke : ', err)
       }
-      console.log('res ===> ', require('util').inspect(res, { colors: true, depth: 2 }))
-      return 'gg'
+      res.status(200).send(`The spot : ${data.name} has been succesfully added !!`)
     })
   },
   updateSpot: (req, res ) => {

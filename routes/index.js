@@ -10,11 +10,11 @@ module.exports = (app) => {
   })
 
   app.put('/api/addspot/:spot', (req, res) => {
-    console.log('req.params.spot ===> ', require('util').inspect(req.params.spot, { colors: true, depth: 4 }))
     spotsController.addSpot(req, res, req.params.spot)
   })
 
   app.post('/api/updatespot/:spot', (req, res) => {
+    console.log('req.params ===> ', require('util').inspect(req.params, { colors: true, depth: 2 }))
     spotsController.updateSpot(req, res, req.params.spot)
   })
 
