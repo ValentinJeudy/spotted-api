@@ -1,5 +1,6 @@
 const spotModel = require('../mongoose/spot.js')
 const fakeSpot = require('../fixtures.js')
+const db = require('mongodb')
 
 module.exports = {
   getSpots: (req, res) => {
@@ -26,11 +27,17 @@ module.exports = {
       res.json(data)
     })
   },
-  addSpot: (req, res, spot) => {
-    // const newSpot = JSON.parse(fakeSpot)
+  addSpot: async (req, res, spot) => {
+    const newSpot = JSON.parse(spot)
 
-    console.log('spot ===> ', require('util').inspect(spot, { colors: true, depth: 2 }))
-    spotModel.insert(spot)
+    console.log('spot ===> ', require('util').inspect(newSpot, { colors: true, depth: 2 }))
+    await spotModel.create(newSpot, (err, res) => {
+      if (err) {
+        res.status(500).send('Seomething broke : ', err)
+      }
+      console.log('res ===> ', require('util').inspect(res, { colors: true, depth: 2 }))
+      return 'gg'
+    })
   },
   updateSpot: (req, res ) => {
     spotModel.update()

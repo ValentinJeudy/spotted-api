@@ -6,13 +6,11 @@ module.exports = (app) => {
   })
 
   app.get('/api/visiblespots/:corners', (req, res) => {
-    console.log('=============> GET VISIBLE SPOT ROUTE <================')
     spotsController.getVisibleSpots(req, res, req.params.corners)
   })
 
-  app.get('/api/addspot/:spot', (req, res) => {
-    console.log('=============> ADD SPOT ROUTE <================')
-    console.log('req.params.spot ===> ', require('util').inspect(req.params.spot, { colors: true, depth: 2 }))
+  app.put('/api/addspot/:spot', (req, res) => {
+    console.log('req.params.spot ===> ', require('util').inspect(req.params.spot, { colors: true, depth: 4 }))
     spotsController.addSpot(req, res, req.params.spot)
   })
 
