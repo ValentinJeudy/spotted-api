@@ -1,6 +1,5 @@
 const spotModel = require('../mongoose/spot.js')
 const fakeSpot = require('../fixtures.js')
-const db = require('mongodb')
 
 module.exports = {
   getSpots: (req, res) => {
@@ -47,7 +46,6 @@ module.exports = {
   deleteSpot: (req, res, spot) => {
     const spotToRemove = JSON.parse(spot)
 
-    console.log('spotToRemove ===> ', require('util').inspect(spotToRemove, { colors: true, depth: 2 }))
     spotModel.deleteOne(spotToRemove, (err, data) => {
       if (err) {
         res.status(500).send(`Something broke : ${err}`)
