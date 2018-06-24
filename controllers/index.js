@@ -22,7 +22,7 @@ module.exports = {
       "localisation.lng": { $gte: coords.swc.lng, $lte: coords.nec.lng },
     }).exec((err, data) => {
       if (err) {
-        res.status(500).send('Something broke : ', err)
+        res.status(500).send(`Something broke : ${err}`)
       }
       res.json(data)
     })
@@ -32,13 +32,20 @@ module.exports = {
 
     spotModel.create(newSpot, (err, data) => {
       if (err) {
-        res.status(500).send('Seomething broke : ', err)
+        res.status(500).send(`Seomething broke : ${err}`)
       }
       res.status(200).send(`The spot : ${data.name} has been succesfully added !!`)
     })
   },
-  updateSpot: (req, res ) => {
-    spotModel.update()
+  updateSpot: (req, res, spot) => {
+    const newSpot = JSON.parse(spot)
+
+    spotModel.updateOne({_id: newSpot._id}, newSpot, (err, data) => {
+    if (err) {
+      res.status(500).send(`Something broke : ${err}`)
+    }
+    res.status(200).send(`The spot : ${newSpot.name} has been succesfully updated !!`)
+    })
   },
   deleteSpot: (req, res) => {
 

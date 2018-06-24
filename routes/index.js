@@ -13,7 +13,7 @@ module.exports = (app) => {
     spotsController.addSpot(req, res, req.params.spot)
   })
 
-  app.post('/api/updatespot/:spot', (req, res) => {
+  app.put('/api/updatespot/:spot', (req, res) => {
     console.log('req.params ===> ', require('util').inspect(req.params, { colors: true, depth: 2 }))
     spotsController.updateSpot(req, res, req.params.spot)
   })
