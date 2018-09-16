@@ -1,8 +1,8 @@
 const spotModel = require('../mongoose/spot.js')
-const fakeSpot = require('../fixtures.js')
+// const fakeSpot = require('../fixtures.js')
 
 module.exports = {
-  getSpots: (req, res) => {
+  getSpots: (req, res) => {
     spotModel.find().exec((err, data) => {
       if (err) {
         res.status(500).send('Something broke : ', err)
@@ -13,15 +13,17 @@ module.exports = {
   getVisibleSpots: (req, res, corners) => {
     const coords = JSON.parse(corners)
 
-    spotModel.find({
-      "localisation.lat": { $gte: coords.swc.lat, $lte: coords.nec.lat },
-      "localisation.lng": { $gte: coords.swc.lng, $lte: coords.nec.lng },
-    }).exec((err, data) => {
-      if (err) {
-        res.status(500).send(`Something is broken : ${err}`)
-      }
-      res.json(data)
-    })
+    spotModel
+      .find({
+        'localisation.lat': { $gte: coords.swc.lat, $lte: coords.nec.lat },
+        'localisation.lng': { $gte: coords.swc.lng, $lte: coords.nec.lng }
+      })
+      .exec((err, data) => {
+        if (err) {
+          res.status(500).send(`Something is broken : ${err}`)
+        }
+        res.json(data)
+      })
   },
   addSpot: (req, res, spot) => {
     const newSpot = JSON.parse(spot)
@@ -30,17 +32,21 @@ module.exports = {
       if (err) {
         res.status(500).send(`Seomething broke : ${err}`)
       }
-      res.status(200).send(`The spot : ${data.name} has been succesfully added !!`)
+      res
+        .status(200)
+        .send(`The spot : ${data.name} has been succesfully added !!`)
     })
   },
   updateSpot: (req, res, spot) => {
     const newSpot = JSON.parse(spot)
 
-    spotModel.updateOne({_id: newSpot._id}, newSpot, (err, data) => {
-    if (err) {
-      res.status(500).send(`Something broke : ${err}`)
-    }
-    res.status(200).send(`The spot : ${newSpot.name} has been succesfully updated !!`)
+    spotModel.updateOne({ _id: newSpot._id }, newSpot, (err, data) => {
+      if (err) {
+        res.status(500).send(`Something broke : ${err}`)
+      }
+      res
+        .status(200)
+        .send(`The spot : ${newSpot.name} has been succesfully updated !!`)
     })
   },
   deleteSpot: (req, res, spot) => {
@@ -50,7 +56,9 @@ module.exports = {
       if (err) {
         res.status(500).send(`Something broke : ${err}`)
       }
-      res.status(200).send(`The spot : ${spotToRemove._id} has been succesfully deleted !!`)
+      res
+        .status(200)
+        .send(`The spot : ${spotToRemove._id} has been succesfully deleted !!`)
     })
   }
 }

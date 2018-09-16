@@ -1,6 +1,6 @@
 const spotsController = require('../controllers')
 
-module.exports = (app) => {
+module.exports = app => {
   app.get('/api/spots', (req, res) => {
     spotsController.getSpots(req, res)
   })
@@ -14,7 +14,10 @@ module.exports = (app) => {
   })
 
   app.put('/api/updatespot/:spot', (req, res) => {
-    console.log('req.params ===> ', require('util').inspect(req.params, { colors: true, depth: 2 }))
+    console.log(
+      'req.params ===> ',
+      require('util').inspect(req.params, { colors: true, depth: 2 })
+    )
     spotsController.updateSpot(req, res, req.params.spot)
   })
 

@@ -1,18 +1,18 @@
 module.exports = {
-  "name": "TEST SPOT",
-  "type": "STREET",
-  "description": "DESCRIPTION OF MY SPOT",
-  "difficulty": "HARD",
-  "location": {
-    "lat": 666,
-    "lng": 666,
-    "placeId": 'IDOFTHEPLACE',
-    "address": "LA THIBAUUUUUUUUDE"
+  name: 'TEST SPOT',
+  type: 'STREET',
+  description: 'DESCRIPTION OF MY SPOT',
+  difficulty: 'HARD',
+  location: {
+    lat: 666,
+    lng: 666,
+    placeId: 'IDOFTHEPLACE',
+    address: 'LA THIBAUUUUUUUUDE'
   },
-  "indoor": false,
-  "media": {
-    "pictures": ["img1", "img2", "img3"],
-    "videos": ["vid1", "vid2", "vid3"]
+  indoor: false,
+  media: {
+    pictures: ['img1', 'img2', 'img3'],
+    videos: ['vid1', 'vid2', 'vid3']
   }
 }
 
