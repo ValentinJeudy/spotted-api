@@ -18,7 +18,7 @@ module.exports = {
       "localisation.lng": { $gte: coords.swc.lng, $lte: coords.nec.lng },
     }).exec((err, data) => {
       if (err) {
-        res.status(500).send(`Something broke : ${err}`)
+        res.status(500).send(`Something is broken : ${err}`)
       }
       res.json(data)
     })
