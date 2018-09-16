@@ -5,7 +5,7 @@ const config = require('config')
 const bdd = config.get('options.BDD_URL')
 const routes = require('./routes')
 const port = config.get('options.SERVER_PORT')
-const socket = require('socket.io')
+// const socket = require('socket.io')
 
 server.listen(config.get('options.SERVER_PORT'))
 
